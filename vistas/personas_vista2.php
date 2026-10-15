@@ -65,6 +65,7 @@
                     <th>Nombre</th>
                     <th>Edad</th>
                     <th>Estatura</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
 
@@ -83,6 +84,9 @@
                         <td>
                             <?= htmlspecialchars($dato["estatura"], ENT_QUOTES, "UTF-8") ?>
                             metros
+                        </td>
+                        <td>
+                            <a href="index.php?accion=eliminar&id=<?= $dato["id"] ?>" onclick="return confirm('¿Deseas eliminar a este usuario?');"> Eliminar</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

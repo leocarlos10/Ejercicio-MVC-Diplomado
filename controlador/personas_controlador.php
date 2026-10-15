@@ -30,6 +30,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 }
+
+$accion = isset($_GET['accion']) ? $_GET['accion'] : 'vista1';
+if ($accion === 'eliminar' && isset($_GET['id'])) {
+    $id = filter_var($_GET['id'], FILTER_VALIDATE_INT);
+    if ($id) {
+        try {
+            $per->eliminar_persona($id);
+            // Redirigimos para limpiar la URL y refrescar la tabla
+            header("Location: index.php?accion=vista1");
+            exit();
+        } catch (Exception $e) {
+            $error = "No se pudo eliminar la persona: " . $e->getMessage();
+        }
+    }
+}
+
 $datos = $per->get_personas();
 //Llamada a la vista
 require_once "vistas/personas_vista2.php";
